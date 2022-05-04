@@ -1,0 +1,75 @@
+# Copyright 2022 Baiatu Bianca (baiatu.daniela2001@gmail.com)
+
+Analiza Algoritmilor - Tema 2 - REDUCERI POLINOMIALE -
+
+* Pentru implementarea tuturor task-urilor am ales sa codific variabilele astfel : vi, cu
+    urmatoarea insemnatate: nodul v ocupa pozitia i in grupul cautat.
+* Pentru implementare am folosit clase separate ReteleBuilder, ReclameBuilder si RegistreBuilder
+    in care se afla intraga logica a programului si care extind clasa abstracta Task. Astfel, in
+    clasele de baza se creeaza obiecte aferente acestor clase, apelandu-se doar metoda solve in cadrul
+    careia se apeleaza celelate metode necesare citirii datelor, formularii intrebarii catre oracol,
+    scrierii solutiei oracolului, descifrarii raspunsului si scrierii decodificate a acestuia.
+
+    * TASK 1 - RETELE SOCIALE
+
+    -> Avand in vedere ca problema descrisa implementeaza problema clicii, am ales sa o reduc pe
+        aceasta la o problema SAT pentru a fi descifrata de oracol.
+    -> Din punct de vedere al implementarii problema utilizeaza pentru maparea grafului de intrare
+        matricea de adiacenta aferenta. Pentru a formula intrebarea catre oracol scrisa in fisierul
+        "sat.cnf" se pun anumite conditii necesare pentru determinarea raspunsului daca exista o
+        clica de dimensiune k (subgraf complet de dimensiune k) in cadrul grafului initial.
+            * Conditia 1: Oricarui nod al clicii trebuie sa ii fie asociat un nod din graf
+                - Din punct de vedere al complexitatii aceasta clauza are: O(k * n), unde k
+                    este dimensiunea clicii si n numarul de varfuri
+            * Conditia 2: Pentru orice pereche de noduri (u, v) acestea nu pot fi amandoua in
+                acelasi timp incluse in clica.
+                - Din punct de vedere al complexitatii aceasta clauza are: O(k^2 * n^2), unde k
+                    este dimensiunea clicii si n numarul de varfuri
+            * Conditia 3: Acelasi nod nu poate exista pe doua pozitii diferite in clica la
+                acelasi moment de timp
+                - Din punct de vedere al complexitatii aceasta clauza are: O(k^2 * n), unde k
+                    este dimensiunea clicii si n numarul de varfuri
+
+    * TASK 2 - RECLAME BUCLUCASE
+
+    -> Se observa ca problema descrisa implementeaza problema acoperirii cu varfuri, astfel am ales
+        sa o reduc pe aceasta la o problema SAT pentru a fi descifrata de oracol.
+    -> Din punct de vedere al implementarii problema utilizeaza pentru maparea grafului de intrare
+        matricea de adiacenta aferenta. Pentru a formula intrebarea catre oracol scrisa in fisierul
+        "sat.cnf" se pun anumite conditii necesare pentru determinarea raspunsului daca exista o
+        posibila acoperire de dimensiune k, unde k variaza pana la intalnirea unui raspuns corect
+            * Conditia 1: Oricarui nod al alcoperirii trebuie sa ii fie asociat un nod din graf
+                - Din punct de vedere al complexitatii aceasta clauza are: O(k * n), unde k
+                    este dimensiunea acoperirii si n numarul de varfuri
+            * Conditia 2: Acelasi nod nu poate exista pe doua pozitii diferite in clica la
+                acelasi moment de timp
+                - Din punct de vedere al complexitatii aceasta clauza are: O(k^2 * n), unde k
+                    este dimensiunea acoperirii si n numarul de varfuri
+            * Conditia 3: Pentru orice pereche de noduri (u, v) intre care exista o muchie,
+                trebuie ca cel putin unul dintre ele sa se afle in acoperire
+                - Din punct de vedere al complexitatii aceasta clauza are: O(k * n^2), unde k
+                    este dimensiunea acoperirii si n numarul de varfuri
+            * Conditia 4: Oricare doua noduri (u,v) nu se pot afla in acoperire pe aceeasi
+                pozitie la acelasi moment de timp
+                - Din punct de vedere al complexitatii aceasta clauza are: O(k * n^2), unde k
+                    este dimensiunea acoperirii si n numarul de varfuri
+
+    * TASK 3 - ALOCAREA REGISTRELOR
+
+    -> Se observa ca problema descrisa implementeaza problema colorarii hartilor, am ales sa o
+        reduc pe aceasta la o problema SAT pentru a fi descifrata de oracol.
+    -> Din punct de vedere al implementarii problema utilizeaza pentru maparea grafului de intrare
+        matricea de adiacenta aferenta. Pentru a formula intrebarea catre oracol scrisa in fisierul
+        "sat.cnf" se pun anumite conditii necesare pentru determinarea raspunsului daca exista
+        posibilitatea de a colora graful utlizizand k culori, astfel incat doua zone tangente
+        sa aiba culori diferite
+            * Conditia 1: Oricarui nod al trebuie sa ii fie asociata o culoare
+                - Din punct de vedere al complexitatii aceasta clauza are: O(k * n), unde k
+                    este numarul de culori si n numarul de varfuri
+            * Conditia 2: Oricarui nod ii poate fi asociata o singura culoare
+                - Din punct de vedere al complexitatii aceasta clauza are: O(k^2 * n), unde k
+                    este numarul de culori si n numarul de varfuri
+            * Conditia 3: Oricaror doua noduri (u,v) intre care exista o muchie nu poate fi
+                asociata aceeasi culoare
+                - Din punct de vedere al complexitatii aceasta clauza are: O(k * n^2), unde k
+                    este numarul de culori si n numarul de varfuri
